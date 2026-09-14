@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Барбершоп</title>
+  <title>Приглашение на свадьбу</title>
   <style>
     :root {
       --bg-color: #121212;
@@ -41,7 +41,7 @@
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       color: var(--accent-color);
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -51,6 +51,7 @@
     .subtitle {
       color: var(--text-muted);
       font-size: 1.1rem;
+      font-style: italic;
     }
 
     section {
@@ -59,10 +60,11 @@
       border-radius: 12px;
       margin-bottom: 25px;
       border: 1px solid var(--border-color);
+      text-align: center;
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: var(--accent-color);
       margin-bottom: 15px;
       border-bottom: 2px solid var(--accent-color);
@@ -70,32 +72,31 @@
       padding-bottom: 5px;
     }
 
-    /* Услуги */
-    .services-list {
-      list-style: none;
-    }
-
-    .service-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .service-item:last-child {
-      border-bottom: none;
-    }
-
-    .service-price {
-      color: var(--accent-color);
-      font-weight: bold;
-    }
-
-    /* Информационные блоки без интерактивных функций */
     .info-text {
       color: var(--text-color);
-      font-size: 1rem;
+      font-size: 1.05rem;
       margin-top: 5px;
+    }
+
+    /* Галерея */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--accent-color);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-img:hover {
+      transform: scale(1.03);
     }
 
     /* Кнопка WhatsApp */
@@ -124,53 +125,51 @@
 
   <div class="container">
     <header>
-      <h1>Барбершоп</h1>
-      <p class="subtitle">Стильные стрижки и качественный уход</p>
+      <h1>Приглашение на свадьбу</h1>
+      <p class="subtitle">Мы будем счастливы разделить этот день с вами</p>
     </header>
 
-    <!-- Услуги -->
+    <!-- Основное обращение -->
     <section>
-      <h2>Услуги и Цены</h2>
-      <ul class="services-list">
-        <li class="service-item">
-          <span>Мужская стрижка</span>
-          <span class="service-price">5 000 ₸</span>
-        </li>
-        <li class="service-item">
-          <span>Оформление бороды</span>
-          <span class="service-price">3 000 ₸</span>
-        </li>
-        <li class="service-item">
-          <span>Комплекс (Стрижка + Борода)</span>
-          <span class="service-price">7 000 ₸</span>
-        </li>
-        <li class="service-item">
-          <span>Детская стрижка</span>
-          <span class="service-price">4 000 ₸</span>
-        </li>
-      </ul>
-    </section>
-
-    <!-- График работы (просто текст) -->
-    <section>
-      <h2>График работы</h2>
-      <p class="info-text">Пн - Вс: с 10:00 до 21:00</p>
-      <p class="info-text" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
-        Запись ведется ежедневно по предварительному согласованию.
+      <h2>Дорогие гости!</h2>
+      <p class="info-text">
+        Приглашаем вас разделить с нами самый важный и счастливый день — день нашей свадьбы!
       </p>
     </section>
 
-    <!-- Адрес (просто текст) -->
+    <!-- Дата и время (просто текст) -->
     <section>
-      <h2>Наш адрес</h2>
-      <p class="info-text">г. Алматы, Центральный парк культуры и отдыха</p>
+      <h2>Дата и время</h2>
+      <p class="info-text">Пятница, 25 Сентября</p>
+      <p class="info-text" style="color: var(--text-muted); font-size: 0.95rem; margin-top: 5px;">
+        Сбор гостей в 17:00 | Начало торжества в 18:00
+      </p>
     </section>
 
-    <!-- Запись -->
+    <!-- Локация (просто текст) -->
     <section>
-      <h2>Записаться на стрижку</h2>
-      <p class="info-text">Нажмите на кнопку ниже, чтобы перейти в WhatsApp и выбрать удобное время для визита.</p>
-      <a href="https://wa.me/77771506381" class="btn-whatsapp" target="_blank">Написать в WhatsApp</a>
+      <h2>Место проведения</h2>
+      <p class="info-text">г. Алматы, Центральный Парк Отдыха города Алматы</p>
+      <p class="info-text" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
+        улица Гоголя 1
+      </p>
+    </section>
+
+    <!-- Фотогалерея в стиле минимализма -->
+    <section>
+      <h2>Наша история</h2>
+      <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Фото 1" class="gallery-img">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="Фото 2" class="gallery-img">
+        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" alt="Фото 3" class="gallery-img">
+      </div>
+    </section>
+
+    <!-- Подтверждение присутствия -->
+    <section>
+      <h2>Подтверждение присутствия</h2>
+      <p class="info-text">Пожалуйста, подтвердите ваше присутствие, написав нам в WhatsApp.</p>
+      <a href="https://wa.me/77771506381" class="btn-whatsapp" target="_blank">Подтвердить в WhatsApp</a>
     </section>
   </div>
 
