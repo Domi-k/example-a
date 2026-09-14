@@ -1,177 +1,420 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Приглашение на свадьбу</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Тойға шақыру — Еркебұлан & Ақбота</title>
+
+  <!-- Open Graph / WhatsApp Превью -->
+  <meta property="og:title" content="Еркебұлан & Ақбота — Тойға шақыру" />
+  <meta property="og:description" content="Сізді үйлену тойымыздың қадірлі қонағы болуға шақырамыз!" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            champagne: '#FDFBF7',
+            gold: {
+              300: '#E5C985',
+              400: '#D4AF37',
+              500: '#C59B27',
+              600: '#AA821A',
+            },
+            dustypink: '#E8D5D3',
+            warmgray: '#4A4744',
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            cursive: ['Alex Brush', 'cursive'],
+            sans: ['Montserrat', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- AOS Library CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
   <style>
-    :root {
-      --bg-color: #121212;
-      --card-bg: #1e1e1e;
-      --accent-color: #f4c2c2; /* Нежно-розовый цвет */
-      --text-color: #ffffff;
-      --text-muted: #a0a0a0;
-      --border-color: #2a2a2a;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    /* Пастельді фон және сәнді текстуралық градиент */
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      padding: 20px;
+      background: linear-gradient(135deg, #fdfbf7 0%, #f7f0ea 50%, #f3e8e1 100%);
+      color: #4a4744;
+      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
+    /* Шыны карточка эффекті (Glassmorphism) */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
     }
 
-    header {
-      text-align: center;
-      padding: 40px 0 20px;
-      border-bottom: 1px solid var(--border-color);
-      margin-bottom: 30px;
+    /* Алтын түстес градиентті мәтін */
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #aa821a 0%, #d4af37 50%, #e5c985 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    h1 {
-      font-size: 2.3rem;
-      color: var(--accent-color);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      font-style: italic;
-    }
-
-    section {
-      background: var(--card-bg);
-      padding: 25px;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      border: 1px solid var(--border-color);
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 1.4rem;
-      color: var(--accent-color);
-      margin-bottom: 15px;
-      border-bottom: 2px solid var(--accent-color);
-      display: inline-block;
-      padding-bottom: 5px;
-    }
-
-    .info-text {
-      color: var(--text-color);
-      font-size: 1.05rem;
-      margin-top: 5px;
-    }
-
-    /* Галерея */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin-top: 15px;
-    }
-
-    .gallery-img {
+    /* Жапырақтар ағыны канвасы */
+    #petalCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 8px;
-      border: 1px solid var(--accent-color);
-      transition: transform 0.3s ease;
-    }
-
-    .gallery-img:hover {
-      transform: scale(1.03);
-    }
-
-    /* Кнопка WhatsApp */
-    .btn-whatsapp {
-      display: block;
-      width: 100%;
-      text-align: center;
-      background-color: var(--accent-color);
-      color: #121212;
-      font-weight: bold;
-      padding: 15px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 1.1rem;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      margin-top: 20px;
-    }
-
-    .btn-whatsapp:hover {
-      background-color: #e6b0b0;
-      transform: translateY(-2px);
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
     }
   </style>
 </head>
-<body>
+<body class="font-sans antialiased selection:bg-gold-300 selection:text-white">
 
-  <div class="container">
-    <header>
-      <h1>Приглашение на свадьбу</h1>
-      <p class="subtitle">Мы будем счастливы разделить этот день с вами</p>
-    </header>
+  <!-- Түсіп жатқан гүл жапырақтарының канвасы -->
+  <canvas id="petalCanvas"></canvas>
 
-    <!-- Основное обращение -->
-    <section>
-      <h2>Дорогие гости!</h2>
-      <p class="info-text">
-        Приглашаем вас разделить с нами самый важный и счастливый день — день нашей свадьбы!
-      </p>
-    </section>
-
-    <!-- Дата и время (просто текст) -->
-    <section>
-      <h2>Дата и время</h2>
-      <p class="info-text">Пятница, 25 Сентября</p>
-      <p class="info-text" style="color: var(--text-muted); font-size: 0.95rem; margin-top: 5px;">
-        Сбор гостей в 17:00 | Начало торжества в 18:00
-      </p>
-    </section>
-
-    <!-- Локация (просто текст) -->
-    <section>
-      <h2>Место проведения</h2>
-      <p class="info-text">г. Алматы, Центральный Парк Отдыха города Алматы</p>
-      <p class="info-text" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
-        улица Гоголя 1
-      </p>
-    </section>
-
-    <!-- Фотогалерея в стиле минимализма -->
-    <section>
-      <h2>Наша история</h2>
-      <div class="gallery">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Фото 1" class="gallery-img">
-        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="Фото 2" class="gallery-img">
-        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" alt="Фото 3" class="gallery-img">
-      </div>
-    </section>
-
-    <!-- Подтверждение присутствия -->
-    <section>
-      <h2>Подтверждение присутствия</h2>
-      <p class="info-text">Пожалуйста, подтвердите ваше присутствие, написав нам в WhatsApp.</p>
-      <a href="https://wa.me/77771506381" class="btn-whatsapp" target="_blank">Подтвердить в WhatsApp</a>
-    </section>
+  <!-- Фондық музыка (YouTube IFrame Player API) -->
+  <div class="hidden">
+    <div id="player"></div>
   </div>
 
+  <!-- Басқару түймесі: Музыканы қосу/өшіру -->
+  <button id="musicToggleBtn" aria-label="Музыканы қосу/өшіру" class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-12 h-12 rounded-full glass-card border border-gold-400/40 text-gold-600 shadow-lg hover:scale-110 active:scale-95 transition-all duration-300">
+    <svg id="musicIconPlay" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <svg id="musicIconPause" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  </button>
+
+  <!-- Басты Бөлім (Hero) -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative py-12">
+    <div data-aos="fade-down" data-aos-duration="1200" class="mb-4">
+      <span class="font-serif italic text-lg sm:text-xl text-gold-600 tracking-widest uppercase">Үйлену тойға шақыру</span>
+    </div>
+
+    <h1 data-aos="zoom-in" data-aos-duration="1500" class="font-cursive text-6xl sm:text-7xl md:text-8xl gold-gradient-text my-2 leading-tight py-2">
+      Еркебұлан & Ақбота
+    </h1>
+
+    <div data-aos="fade-up" data-aos-duration="1200" class="mt-6 glass-card px-8 py-4 rounded-full inline-block">
+      <p class="font-serif text-xl sm:text-2xl tracking-wide text-warmgray">
+        25 Қазан 2026 жыл
+      </p>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-gold-500/70">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- Негізгі Мәтін / Шақыру -->
+  <section class="py-16 px-4 max-w-3xl mx-auto text-center">
+    <div class="glass-card rounded-3xl p-8 sm:p-12" data-aos="fade-up" data-aos-duration="1000">
+      <div class="w-12 h-12 mx-auto mb-6 text-gold-500">
+        <svg fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+
+      <h2 class="font-serif text-2xl sm:text-3xl text-warmgray mb-6 font-normal leading-relaxed">
+        Құрметті бауырлар, туыстар, әріптестер, дос-жарандар!
+      </h2>
+
+      <p class="font-serif text-lg sm:text-xl text-warmgray/90 leading-relaxed mb-6 font-light">
+        Сіздерді ұлымыз <span class="font-semibold text-gold-600">Еркебұлан</span> мен келініміз <span class="font-semibold text-gold-600">Ақботаның</span> шаңырақ көтеру тойына арналған салтанатты ақ дастарханымыздың қадірлі қонағы болуға шақырамыз!
+      </p>
+
+      <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto my-6"></div>
+
+      <p class="font-cursive text-3xl sm:text-4xl text-gold-600">
+        Той иелері: Нұрлан & Сауле
+      </p>
+    </div>
+  </section>
+
+  <!-- Кері Санақ Таймері -->
+  <section class="py-12 px-4 max-w-4xl mx-auto text-center">
+    <h3 data-aos="fade-up" class="font-serif text-2xl sm:text-3xl text-warmgray mb-8">
+      Салтанатты сәтке дейін қалды:
+    </h3>
+
+    <div id="countdownContainer" data-aos="zoom-in" class="grid grid-cols-4 gap-3 sm:gap-6 max-w-xl mx-auto">
+      <div class="glass-card p-4 sm:p-6 rounded-2xl flex flex-col justify-center items-center">
+        <span id="days" class="font-serif text-2xl sm:text-4xl font-semibold text-gold-600">00</span>
+        <span class="font-sans text-xs sm:text-sm text-warmgray/70 uppercase mt-1">Күн</span>
+      </div>
+      <div class="glass-card p-4 sm:p-6 rounded-2xl flex flex-col justify-center items-center">
+        <span id="hours" class="font-serif text-2xl sm:text-4xl font-semibold text-gold-600">00</span>
+        <span class="font-sans text-xs sm:text-sm text-warmgray/70 uppercase mt-1">Сағат</span>
+      </div>
+      <div class="glass-card p-4 sm:p-6 rounded-2xl flex flex-col justify-center items-center">
+        <span id="minutes" class="font-serif text-2xl sm:text-4xl font-semibold text-gold-600">00</span>
+        <span class="font-sans text-xs sm:text-sm text-warmgray/70 uppercase mt-1">Минут</span>
+      </div>
+      <div class="glass-card p-4 sm:p-6 rounded-2xl flex flex-col justify-center items-center">
+        <span id="seconds" class="font-serif text-2xl sm:text-4xl font-semibold text-gold-600">00</span>
+        <span class="font-sans text-xs sm:text-sm text-warmgray/70 uppercase mt-1">Секунд</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Бағдарлама мен Мекенжай -->
+  <section class="py-16 px-4 max-w-3xl mx-auto">
+    <div class="glass-card rounded-3xl p-8 sm:p-12 text-center" data-aos="fade-up">
+      <h3 class="font-serif text-3xl text-warmgray mb-8">Той Бағдарламасы</h3>
+
+      <div class="space-y-8 font-serif">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6">
+          <span class="text-2xl text-gold-600 font-semibold">18:00</span>
+          <span class="hidden sm:inline text-gold-300">•</span>
+          <span class="text-xl text-warmgray">Қонақтардың жиналуы</span>
+        </div>
+        <div class="w-12 h-px bg-gold-300/40 mx-auto"></div>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6">
+          <span class="text-2xl text-gold-600 font-semibold">19:00</span>
+          <span class="hidden sm:inline text-gold-300">•</span>
+          <span class="text-xl text-warmgray">Салтанатты тойдың басталуы</span>
+        </div>
+      </div>
+
+      <div class="my-10 border-t border-gold-300/30"></div>
+
+      <!-- Мекенжай Бөлімі -->
+      <h3 class="font-serif text-3xl text-warmgray mb-4">Мекенжайымыз</h3>
+      <p class="font-serif text-xl text-gold-600 mb-1">"Ritz-Carlton" Restoran</p>
+      <p class="font-sans text-sm text-warmgray/80 mb-6">Алматы қ., Әл-Фараби даңғылы, 77/7</p>
+
+      <!-- Навигациялық түймелер -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="https://2gis.kz" target="_blank" class="w-full sm:w-auto px-6 py-3 rounded-full bg-gold-500 hover:bg-gold-600 text-white font-sans text-xs tracking-wider uppercase font-semibold transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          2GIS арқылы ашу
+        </a>
+        
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Еркебұлан+мен+Ақботаның+Тойы&dates=20261025T130000Z/20261025T180000Z&details=Үйлену+тойына+шақыру&location=Ritz-Carlton+Almaty" target="_blank" class="w-full sm:w-auto px-6 py-3 rounded-full border border-gold-500 text-gold-600 hover:bg-gold-50 font-sans text-xs tracking-wider uppercase font-semibold transition-all flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          Календарьға сақтау
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Қатысуды Растау (RSVP) -->
+  <section id="rsvp" class="py-16 px-4 max-w-xl mx-auto text-center">
+    <div class="glass-card rounded-3xl p-8 sm:p-10" data-aos="fade-up">
+      <h3 class="font-serif text-3xl text-warmgray mb-2">Тойға қатысуыңызды растаңыз</h3>
+      <p class="font-sans text-xs text-warmgray/70 mb-6">Өтініш, 2026 жылдың 15 қазанына дейін жауап беріңіз</p>
+
+      <form id="rsvpForm" class="space-y-4 text-left">
+        <div>
+          <label class="block font-sans text-xs text-warmgray/80 mb-1">Аты-жөніңіз:</label>
+          <input type="text" id="guestName" required placeholder="Мысалы: Арман мен Айнұр" class="w-full px-4 py-3 rounded-xl border border-gold-300/60 focus:outline-none focus:border-gold-500 bg-white/80 font-sans text-sm text-warmgray" />
+        </div>
+
+        <div>
+          <label class="block font-sans text-xs text-warmgray/80 mb-1">Жауабыңыз:</label>
+          <select id="guestStatus" class="w-full px-4 py-3 rounded-xl border border-gold-300/60 focus:outline-none focus:border-gold-500 bg-white/80 font-sans text-sm text-warmgray">
+            <option value="Қуана келемін!">Қуана келемін ✨</option>
+            <option value="Жұбыммен келемін">Жұбыммен келемін 👩‍❤️‍👨</option>
+            <option value="Өкінішке орай келе алмаймын">Өкінішке орай келе алмаймын 😔</option>
+          </select>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-sans text-xs tracking-wider uppercase font-semibold transition-all shadow-md mt-2">
+          Жауапты WhatsApp-пен жіберу
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Футер -->
+  <footer class="py-12 text-center text-warmgray/60 font-serif text-sm">
+    <p>Сізді тойда күтеміз!</p>
+    <p class="font-cursive text-2xl text-gold-600 mt-2">Еркебұлан & Ақбота</p>
+  </footer>
+
+  <!-- Скрипттер -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // AOS анимациясын бастау
+    AOS.init({
+      once: true,
+      duration: 1000,
+    });
+
+    // --- 1. КЕРІ САНАҚ ТАЙМЕРІ ---
+    const targetDate = new Date('2026-10-25T18:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = String(days).padStart(2, '0');
+        document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // --- 2. ЖАПЫРАҚТАР АҒЫНЫ (PETAL CANVAS) ---
+    const canvas = document.getElementById('petalCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const petals = Array.from({ length: 25 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 8 + 6,
+      speedY: Math.random() * 1 + 0.5,
+      speedX: Math.random() * 0.5 - 0.25,
+      opacity: Math.random() * 0.5 + 0.3,
+      angle: Math.random() * Math.PI * 2,
+      spin: Math.random() * 0.02 - 0.01,
+    }));
+
+    function animatePetals() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      petals.forEach((p) => {
+        p.y += p.speedY;
+        p.x += p.speedX;
+        p.angle += p.spin;
+
+        if (p.y > canvas.height) {
+          p.y = -10;
+          p.x = Math.random() * canvas.width;
+        }
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.fillStyle = `rgba(232, 213, 211, ${p.opacity})`;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.size, p.size / 2, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      requestAnimationFrame(animatePetals);
+    }
+    animatePetals();
+
+    // --- 3. YOUTUBE МУЗЫКА МЕН АВТОПЛЕЙ СЦЕНАРИЙІ ---
+    let player;
+    let isPlaying = false;
+
+    // YouTube API жүктеу
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '0',
+        width: '0',
+        videoId: 'dQw4w9WgXcQ', // Осы жерге той әнінің YouTube Video ID қойыңыз
+        playerVars: {
+          'autoplay': 1,
+          'loop': 1,
+          'playlist': 'dQw4w9WgXcQ'
+        },
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+    }
+
+    function onPlayerReady(event) {
+      // Алғашқы қолданушы клигінен кейін музыканы автоматты қосу (браузер бұғауын ашу)
+      const enableAudio = () => {
+        if (!isPlaying && player) {
+          player.playVideo();
+          isPlaying = true;
+          updateMusicUI();
+        }
+        document.removeEventListener('click', enableAudio);
+        document.removeEventListener('touchstart', enableAudio);
+      };
+
+      document.addEventListener('click', enableAudio);
+      document.addEventListener('touchstart', enableAudio);
+    }
+
+    const musicBtn = document.getElementById('musicToggleBtn');
+    const playIcon = document.getElementById('musicIconPlay');
+    const pauseIcon = document.getElementById('musicIconPause');
+
+    function updateMusicUI() {
+      if (isPlaying) {
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+      } else {
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+      }
+    }
+
+    musicBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!player) return;
+      
+      if (isPlaying) {
+        player.pauseVideo();
+        isPlaying = false;
+      } else {
+        player.playVideo();
+        isPlaying = true;
+      }
+      updateMusicUI();
+    });
+
+    // --- 4. RSVP ТІКЕЛЕЙ WHATSAPP-ҚА ЖІБЕРУ ---
+    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('guestName').value;
+      const status = document.getElementById('guestStatus').value;
+      const phone = "77771506381"; // Ұйымдастырушының WhatsApp нөмірі
+
+      const text = `Сәлеметсіз бе! Менің атым: ${name}.\nТойға қатысу жауабым: ${status}`;
+      const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+
+      window.open(whatsappUrl, '_blank');
+    });
+  </script>
 </body>
 </html>
